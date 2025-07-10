@@ -1,4 +1,5 @@
-[
+
+ [
   {
     "id": 1,
     "nome": "DevBurger Clássico",
@@ -14,5 +15,5 @@
     "nome": "Commit Veggie",
     "ingredientes": "Pão integral, Burger de grão de bico, Queijo vegano, Rúcula, Tomate seco, Maionese de ervas"
   }
-  
 ]
+
