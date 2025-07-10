@@ -56,6 +56,70 @@ app.get('/api/lanches/:id', (req, res) => {
   }
 });
 
+app.use(express.urlencoded({ extended: true }));
+
+app.post("/contato", (req, res) => {
+  const { nome, email, assunto, mensagem } = req.body;
+
+  if (!nome || !email || !assunto || !mensagem) {
+    return res.status(400).sendFile(path.join(__dirname, "public", "400.html"));
+  }
+
+  res.send(`
+    <!DOCTYPE html>
+    <html lang="pt-BR">
+      <head>
+        <meta charset="UTF-8" />
+        <title>Contato Recebido - DevBurger</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/css/style.css">
+        <link href="https://fonts.googleapis.com/css2?family=Libertinus+Mono&display=swap" rel="stylesheet">
+      </head>
+      <body class="bg-black text-white d-flex align-items-center justify-content-center min-vh-100">
+        <div class="page-box">
+          <h1>Contato Recebido! Muito Obrigado S2</h1>
+          <p><strong>Nome:</strong> ${nome}</p>
+          <p><strong>Email:</strong> ${email}</p>
+          <p><strong>Assunto:</strong> ${assunto}</p>
+          <p><strong>Mensagem:</strong> ${mensagem}</p>
+          <a href="/" class="btn-devburger">Voltar ao início</a>
+        </div>
+      </body>
+    </html>
+  `);
+});
+
+app.get("/sugestao", (req, res) => {
+  const { nome, ingredientes } = req.query;
+
+  if (nome && ingredientes) {
+  res.send(`
+    <!DOCTYPE html>
+    <html lang="pt-BR">
+      <head>
+        <meta charset="UTF-8" />
+        <title>Sugestão Recebida - DevBurger</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/css/style.css">
+        <link href="https://fonts.googleapis.com/css2?family=Libertinus+Mono&display=swap" rel="stylesheet">
+      </head>
+      <body class="bg-black text-white d-flex align-items-center justify-content-center min-vh-100">
+        <div class="page-box">
+          <h1>Sugestão Recebida! Muito Obrigado S2</h1>
+          <p><strong>Lanche sugerido:</strong> ${nome}</p>
+          <p><strong>Ingredientes:</strong> ${ingredientes}</p>
+          <a href="/" class="btn-devburger">Voltar ao início</a>
+        </div>
+      </body>
+    </html>
+  `);
+  } else {
+    res.status(400).sendFile(path.join(__dirname, "public", "400.html"));
+  }
+});
+
 app.listen(PORT, () => {
     console.log(`Servidor rodando em http://localhost:${PORT}`);
 });

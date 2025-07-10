@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="">
 </head>
 <body>
+    <div class="topo-fixo">
     <header>
         <h1>Welcome to DevBurger</h1>
     </header>
@@ -25,7 +26,21 @@
                 <!-- Os lances vão aparecer dinamicamente-->
             </ul>
         </section>
-    </main>
+        <article id="sugestaoBox">
+            <h2>Deixe sua sugestão</h2>
+            <p>Queremos ouvir você! Deixe sua sugestão abaixo:</p>
+            <form id="formSugestao" action="/sugestao" method="GET">
+                <label for="nome">Nome:</label>
+                <input type="text" id="nome" name="nome" placeholder="Nome do lanche" required>
+
+                <label for="ingredientes">Ingredientes:</label>
+                <input type="text" id="ingredientes" name="ingredientes" placeholder="Ingredientes separados por vírgula" required>
+
+                <button type="submit" id="btnEnviarSugestao">Enviar</button>
+            </form>
+        <p id="msgSugestao"></p>
+        </article>
+   </main>
     <footer>
         <p>&copy; 2023 DevBurger. All rights reserved.</p>
     </footer>

@@ -40,14 +40,15 @@ nav a:hover {
 
 main {
     max-width: 700px;
-    height: 300px;
+    min-height: 300px;
+    margin-bottom: 60px;
     margin: 100px auto;
     padding: 20px;
-    background-color: #1a1a1a;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 section {
+    background-color: #1a1a1a;
     margin-bottom: 20px;
 }
 
@@ -70,12 +71,120 @@ section ul iframe {
     border-radius: 8px;
 }
 
+article {
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #2a2a2a;
+    border-radius: 8px;
+}
+
+article h2{
+    color: #eb0800;
+    font-size: 24px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+article p {
+    font-size: 18px;
+}
+
+#sugestaoBox {
+    background-color: #2a2a2a;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 80px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+#sugestaoBox h2 {
+    color: #eb0800;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+#sugestaoBox p {
+    text-align: center;
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+#formSugestao {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+#textoSugestao {
+    resize: vertical;
+    min-height: 120px;
+    font-family: 'Libertinus Mono', monospace;
+    font-size: 16px;
+    padding: 12px;
+    border: 1px solid #555;
+    border-radius: 6px;
+    background-color: #1a1a1a;
+    color: #fcfcfc;
+}
+
+#textoSugestao:focus {
+    outline: none;
+    border-color: #eb0800;
+    box-shadow: 0 0 5px #eb0800;
+}
+
+#formSugestao button {
+    align-self: center;
+    background-color: #eb0800;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#formSugestao button:hover {
+    background-color: #c50700;
+}   
+
 footer {
     background-color: #eb0800;
     color: white;
     text-align: center;
     padding: 10px 0;
-    position: fixed;
+    position: static;
     bottom: 0;
     width: 100%;
+}
+
+
+.page-box {
+    background-color: #1a1a1a;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+    max-width: 600px;
+    margin: auto;
+    text-align: center;
+}
+
+.page-box h1 {
+    color: #eb0800;
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+.page-box a.btn-devburger {
+    background-color: #eb0800;
+    color: white;
+    font-weight: bold;
+    border-radius: 6px;
+    padding: 10px 20px;
+    text-decoration: none;
+}
+
+.page-box a.btn-devburger:hover {
+    background-color: #c50700;
 }
