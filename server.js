@@ -39,15 +39,18 @@ const lanche =  [
 
 app.get('/api/lanches', (req, res) => {
   fs.writeFileSync(path.join(__dirname, 'public', 'lanches.json'), JSON.stringify(lanche, null, 2));
-  const html = lanche.map(item => `
+  res.setHeader('Content-Type', 'application/json');
+  const lanches = lanche.map(item => `
     <li style="list-style: none">
       <h1 style="color: white">${item.nome}</h1>
       <p style="color: white"><strong>Ingredientes: ${item.ingredientes}</strong></p>
     </li>
   `).join('');
-
-  res.send(`<ul>${html}</ul>`);
-})
+  res.json(lanche);
+  if (lanche.length === 0) {
+    res.status(404).sendFile(path.join(__dirname, 'public', '404.html'));
+  }
+});
 
 app.use(express.urlencoded({ extended: true }));
 
