@@ -19,42 +19,35 @@ app.get('/contato', (req, res) => {
     res.sendFile(path.join(__dirname, 'views', 'contato.html'));
 });
 
+const lanche =  [
+  {
+    "id": 1,
+    "nome": "DevBurger Clássico",
+    "ingredientes": "Pão brioche, Carne 150g, Queijo cheddar, Alface americana, Tomate fresco, Molho especial"
+  },
+  {
+    "id": 2,
+    "nome": "Burger de Bacon",
+    "ingredientes": "Pão australiano, Carne 180g, Queijo prato, Bacon crocante, Cebola caramelizada, Molho barbecue"
+  },
+  {
+    "id": 3,
+    "nome": "Commit Veggie",
+    "ingredientes": "Pão integral, Burger de grão de bico, Queijo vegano, Rúcula, Tomate seco, Maionese de ervas"
+  }
+];
+
 app.get('/api/lanches', (req, res) => {
-  try {
-    const data = fs.readFileSync(path.join(__dirname, 'public', 'data', 'lanches.json'), 'utf-8');
-    const lanches = JSON.parse(data);
+  fs.writeFileSync(path.join(__dirname, 'public', 'lanches.json'), JSON.stringify(lanche, null, 2));
+  const html = lanche.map(item => `
+    <li style="list-style: none">
+      <h1 style="color: white">${item.nome}</h1>
+      <p style="color: white"><strong>Ingredientes: ${item.ingredientes}</strong></p>
+    </li>
+  `).join('');
 
-    let lanchesList = '<ul>';
-    lanches.forEach(lanche => {
-      lanchesList += `<li style="color: white"><h3>${lanche.nome}</h3><p>${lanche.ingredientes}</p></li>`;
-    });
-    lanchesList += '</ul>';
-
-    res.send(lanchesList);
-  } catch (err) {
-    console.error('Erro:', err);
-    res.status(500).send('Erro ao carregar o cardápio');
-  }
-});
-
-app.get('/api/lanches/:id', (req, res) => {
-  try {
-    const data = fs.readFileSync(path.join(__dirname, 'public/data/lanches.json'), 'utf-8');
-    const lanches = JSON.parse(data);
-
-    const id = parseInt(req.params.id);
-    const lanche = lanches.find(l => l.id === id);
-
-    if (lanche) {
-      res.json(lanche);
-    } else {
-      res.status(404).send('Lanche não encontrado');
-    }
-  } catch (err) {
-    console.error('Erro ao buscar lanche:', err);
-    res.status(500).send('Erro interno');
-  }
-});
+  res.send(`<ul>${html}</ul>`);
+})
 
 app.use(express.urlencoded({ extended: true }));
 
